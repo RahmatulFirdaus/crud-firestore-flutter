@@ -85,13 +85,20 @@ class _HomePageState extends State<HomePage> {
                   String noteWaktu = noteData['waktu'].toString();
 
                   return ListTile(
-                    title: Text(noteText),
-                    trailing: IconButton(
-                        onPressed: () {
-                          openBox(noteID: noteID);
-                        },
-                        icon: Icon(Icons.edit)),
-                  );
+                      title: Text(noteText),
+                      trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+                        IconButton(
+                            onPressed: () {
+                              openBox(noteID: noteID);
+                            },
+                            icon: Icon(Icons.edit)),
+                        IconButton(
+                          onPressed: () {
+                            fireStoreService.deleteNote(noteID);
+                          },
+                          icon: Icon(Icons.delete),
+                        )
+                      ]));
                 },
                 itemCount: noteList.length);
           } else {
